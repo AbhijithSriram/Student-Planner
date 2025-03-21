@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Planner - Tasks</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 30px;
+        }
+
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+
+        nav {
+            background-color: #3498db;
+            padding: 15px 0;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            background-color: #2980b9;
+        }
+
+        /* Tasks Page */
+        .tasks-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .task-item:last-child {
+            border-bottom: none;
+        }
+
+        .task-checkbox {
+            margin-right: 15px;
+            transform: scale(1.2);
+        }
+
+        .task-content {
+            flex-grow: 1;
+        }
+
+        .task-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .task-description {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .task-meta {
+            display: flex;
+            font-size: 0.8rem;
+            color: #777;
+            margin-top: 5px;
+        }
+
+        .task-deadline {
+            margin-right: 15px;
+        }
+
+        .priority-high {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
+        .priority-low {
+            color: #3498db;
+        }
+
+        .add-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #2ecc71;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .add-btn:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <!-- TASKS PAGE -->
+    <div class="container" id="tasks-page">
+        <header>
+            <h1>Tasks</h1>
+            <p>Friday, March 21, 2025</p>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="tasks.html" class="active">Tasks</a></li>
+                <li><a href="notes.html">Notes</a></li>
+                <li><a href="history.html">History</a></li>
+            </ul>
+        </nav>
+
+        <div class="tasks-container">
+            <h2>All Tasks</h2>
+            
+            <!-- Example tasks sorted by priority and deadline -->
+            <div class="task-item">
+                <input type="checkbox" class="task-checkbox">
+                <div class="task-content">
+                    <div class="task-title">Complete Web Programming Assignment</div>
+                    <div class="task-description">Finish the HTML/CSS implementation of the student planner</div>
+                    <div class="task-meta">
+                        <div class="task-deadline">Due: Today, 11:59 PM</div>
+                        <div class="task-priority priority-high">High Priority</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-item">
+                <input type="checkbox" class="task-checkbox">
+                <div class="task-content">
+                    <div class="task-title">Study for Data Structures Quiz</div>
+                    <div class="task-description">Review chapters 5-7</div>
+                    <div class="task-meta">
+                        <div class="task-deadline">Due: Today, 3:00 PM</div>
+                        <div class="task-priority priority-high">High Priority</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-item">
+                <input type="checkbox" class="task-checkbox">
+                <div class="task-content">
+                    <div class="task-title">Research Paper Outline</div>
+                    <div class="task-description">Create a detailed outline for the research paper on renewable energy</div>
+                    <div class="task-meta">
+                        <div class="task-deadline">Due: Tomorrow, 5:00 PM</div>
+                        <div class="task-priority priority-high">High Priority</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-item">
+                <input type="checkbox" class="task-checkbox">
+                <div class="task-content">
+                    <div class="task-title">Math Problem Set</div>
+                    <div class="task-description">Complete problems 15-30 in Chapter 8</div>
+                    <div class="task-meta">
+                        <div class="task-deadline">Due: In 3 days</div>
+                        <div class="task-priority priority-low">Low Priority</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-item">
+                <input type="checkbox" class="task-checkbox">
+                <div class="task-content">
+                    <div class="task-title">Read Chapters 10-12</div>
+                    <div class="task-description">Literature assignment - "The Great Gatsby"</div>
+                    <div class="task-meta">
+                        <div class="task-deadline">Due: Next week</div>
+                        <div class="task-priority priority-low">Low Priority</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add New Task Button -->
+        <a href="new-task.html" class="add-btn">+</a>
+    </div>
+</body>
+</html>

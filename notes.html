@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Planner - Notes</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 30px;
+        }
+
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+
+        nav {
+            background-color: #3498db;
+            padding: 15px 0;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            background-color: #2980b9;
+        }
+
+        /* Notes Page */
+        .notes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .note-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+            min-height: 200px;
+        }
+
+        .note-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .note-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .note-content {
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        .add-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #2ecc71;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .add-btn:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <!-- NOTES PAGE -->
+    <div class="container" id="notes-page">
+        <header>
+            <h1>Notes</h1>
+            <p>Friday, March 21, 2025</p>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="tasks.html">Tasks</a></li>
+                <li><a href="notes.html" class="active">Notes</a></li>
+                <li><a href="history.html">History</a></li>
+            </ul>
+        </nav>
+
+        <div class="notes-container">
+            <!-- Example Note Cards -->
+            <div class="note-card" onclick="window.location.href='view-note.html'">
+                <div class="note-title">Web Programming Concepts</div>
+                <div class="note-content">
+                    HTML structure provides the skeleton. CSS provides the styling. JavaScript adds interactivity.
+                    Key concepts to remember: Box model, Flexbox, Grid layout...
+                </div>
+            </div>
+
+            <div class="note-card" onclick="window.location.href='view-note.html'">
+                <div class="note-title">Data Structures Notes</div>
+                <div class="note-content">
+                    Arrays have O(1) access time but O(n) insertion time at the beginning.
+                    Linked Lists have O(1) insertion time but O(n) access time.
+                    Hash tables provide O(1) average case for both operations...
+                </div>
+            </div>
+
+            <div class="note-card" onclick="window.location.href='view-note.html'">
+                <div class="note-title">Research Paper Ideas</div>
+                <div class="note-content">
+                    1. Impact of renewable energy on rural economies
+                    2. Comparison of solar and wind energy efficiency
+                    3. Government policies supporting green infrastructure...
+                </div>
+            </div>
+        </div>
+
+        <!-- Add New Note Button -->
+        <a href="new-note.html" class="add-btn">+</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Planner - View Note</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 30px;
+        }
+
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+
+        nav {
+            background-color: #3498db;
+            padding: 15px 0;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            background-color: #2980b9;
+        }
+
+        /* Note Viewer */
+        .note-view {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .note-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .note-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+        }
+
+        .note-date {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .note-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .note-content p {
+            margin-bottom: 15px;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .edit-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+        
+        .edit-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .back-btn {
+            background-color: #95a5a6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+        
+        .back-btn:hover {
+            background-color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>View Note</h1>
+            <p>Friday, March 21, 2025</p>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="tasks.html">Tasks</a></li>
+                <li><a href="notes.html" class="active">Notes</a></li>
+                <li><a href="history.html">History</a></li>
+            </ul>
+        </nav>
+
+        <div class="note-view">
+            <div class="note-header">
+                <h2 class="note-title">Web Programming Concepts</h2>
+                <span class="note-date">Created: March 15, 2025</span>
+            </div>
+            
+            <div class="note-content">
+                <p>HTML structure provides the skeleton for web pages. It defines the basic elements and their relationships.</p>
+                
+                <p>CSS provides the styling and visual presentation. Key concepts to remember:</p>
+                <ul>
+                    <li>Box model - Content, padding, border, margin</li>
+                    <li>Flexbox - One-dimensional layout</li>
+                    <li>Grid layout - Two-dimensional layout</li>
+                    <li>Selectors - Element, class, ID</li>
+                    <li>Media queries - Responsive design</li>
+                </ul>
+                
+                <p>JavaScript adds interactivity to static pages. Important JavaScript concepts:</p>
+                <ul>
+                    <li>DOM manipulation</li>
+                    <li>Event handling</li>
+                    <li>Asynchronous operations</li>
+                    <li>Fetch API for server communication</li>
+                </ul>
+                
+                <p>The most important principle in web development is progressive enhancement - start with a solid HTML foundation, enhance with CSS, and then add JavaScript functionality.</p>
+            </div>
+            
+            <div class="button-group">
+                <a href="notes.html" class="back-btn">Back to Notes</a>
+                <a href="edit-note.html" class="edit-btn">Edit Note</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

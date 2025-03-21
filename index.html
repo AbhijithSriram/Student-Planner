@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Planner - Home</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 30px;
+        }
+
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+
+        nav {
+            background-color: #3498db;
+            padding: 15px 0;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            background-color: #2980b9;
+        }
+
+        /* Home Page */
+        .welcome-message {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .today-tasks {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .today-tasks h2 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .task-item:last-child {
+            border-bottom: none;
+        }
+
+        .task-checkbox {
+            margin-right: 15px;
+            transform: scale(1.2);
+        }
+
+        .task-content {
+            flex-grow: 1;
+        }
+
+        .task-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .task-description {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .task-meta {
+            display: flex;
+            font-size: 0.8rem;
+            color: #777;
+            margin-top: 5px;
+        }
+
+        .task-deadline {
+            margin-right: 15px;
+        }
+
+        .priority-high {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
+        .priority-low {
+            color: #3498db;
+        }
+
+        .relax-message {
+            text-align: center;
+            padding: 50px 0;
+            color: #27ae60;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- HOME PAGE -->
+    <div class="container" id="home-page">
+        <header>
+            <h1>Student Planner</h1>
+            <p>Friday, March 21, 2025</p>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="tasks.html">Tasks</a></li>
+                <li><a href="notes.html">Notes</a></li>
+                <li><a href="history.html">History</a></li>
+            </ul>
+        </nav>
+
+        <div class="welcome-message">
+            <h2>Welcome Back, Student!</h2>
+            <p>Here's what you need to focus on today:</p>
+        </div>
+
+        <div class="today-tasks">
+            <h2>Today's Tasks</h2>
+            
+            <!-- Example tasks for today -->
+            <div class="task-item">
+                <input type="checkbox" class="task-checkbox">
+                <div class="task-content">
+                    <div class="task-title">Complete Web Programming Assignment</div>
+                    <div class="task-description">Finish the HTML/CSS implementation of the student planner</div>
+                    <div class="task-meta">
+                        <div class="task-deadline">Due: Today, 11:59 PM</div>
+                        <div class="task-priority priority-high">High Priority</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-item">
+                <input type="checkbox" class="task-checkbox">
+                <div class="task-content">
+                    <div class="task-title">Study for Data Structures Quiz</div>
+                    <div class="task-description">Review chapters 5-7</div>
+                    <div class="task-meta">
+                        <div class="task-deadline">Due: Today, 3:00 PM</div>
+                        <div class="task-priority priority-high">High Priority</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Uncomment this to show "relax" message instead of tasks -->
+            <!--
+            <div class="relax-message">
+                <p>No tasks for today - Time to relax! 😎</p>
+            </div>
+            -->
+        </div>
+    </div>
+</body>
+</html>
