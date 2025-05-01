@@ -144,6 +144,78 @@
         .back-btn:hover {
             background-color: #7f8c8d;
         }
+
+        .delete-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+        
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        .modal-title {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .modal-text {
+            margin-bottom: 20px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .modal-confirm {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .modal-cancel {
+            background-color: #95a5a6;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -194,8 +266,23 @@
             <div class="button-group">
                 <a href="notes.html" class="back-btn">Back to Notes</a>
                 <a href="edit-note.html" class="edit-btn">Edit Note</a>
+                <button id="delete-note-btn" class="delete-btn">Delete Note</button>
             </div>
         </div>
     </div>
+
+    <!-- Confirmation Modal -->
+    <div id="delete-confirmation-modal" class="modal">
+        <div class="modal-content">
+            <h3 class="modal-title">Delete Note</h3>
+            <p class="modal-text">Are you sure you want to delete this note? This action cannot be undone.</p>
+            <div class="modal-buttons">
+                <button class="modal-cancel" id="cancel-delete">Cancel</button>
+                <button class="modal-confirm" id="confirm-delete">Delete</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
 </body>
 </html>
