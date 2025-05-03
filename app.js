@@ -39,9 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
     highlightActiveTab(currentPage);
 });
 
-// ====================
-// STORAGE MANAGEMENT
-// ====================
+
 
 const StorageManager = {
     // Save data to localStorage with the given key
@@ -131,6 +129,23 @@ const TaskManager = {
         return tasks.filter(task => task.deadline === today);
     },
     
+    // Get upcoming tasks (tasks due after today)
+    getUpcomingTasks: function(limit = 5) {
+        const tasks = this.getActiveTasks();
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        // Filter tasks with deadlines after today
+        const upcomingTasks = tasks.filter(task => {
+            const taskDate = new Date(task.deadline);
+            taskDate.setHours(0, 0, 0, 0);
+            return taskDate > today;
+        });
+        
+        // Sort and limit the number of upcoming tasks
+        return this.sortTasks(upcomingTasks).slice(0, limit);
+    },
+    
     // Mark a task as complete
     completeTask: function(taskId) {
         const tasks = this.getAllTasks();
@@ -200,9 +215,7 @@ const TaskManager = {
     },
 };
 
-// ====================
 // NOTE MANAGEMENT
-// ====================
 
 const NoteManager = {
     // Generate a unique ID for new notes
@@ -383,24 +396,63 @@ function highlightActiveTab(currentPage) {
     });
 }
 
-// Render the home page with today's tasks
+// Render the home page with today's tasks and upcoming tasks if today is empty
 function renderHomePage() {
     const todayTasksContainer = document.querySelector('.today-tasks');
     if (!todayTasksContainer) return;
     
     const todayTasks = TaskManager.getTodayTasks();
-    const sortedTasks = TaskManager.sortTasks(todayTasks);
+    const sortedTodayTasks = TaskManager.sortTasks(todayTasks);
     
     let html = '<h2>Today\'s Tasks</h2>';
     
-    if (sortedTasks.length === 0) {
+    if (sortedTodayTasks.length === 0) {
+        // No tasks today, show a relax message and then display upcoming tasks
         html += `
             <div class="relax-message">
                 <p>No tasks for today - Time to relax! 😎</p>
             </div>
         `;
+        
+        // Add upcoming tasks section
+        const upcomingTasks = TaskManager.getUpcomingTasks(5); // Limit to 5 upcoming tasks
+        
+        if (upcomingTasks.length > 0) {
+            html += `
+                <h2 class="upcoming-title">Upcoming Tasks</h2>
+                <div class="upcoming-tasks">
+            `;
+            
+            upcomingTasks.forEach(task => {
+                const isOverdue = TaskManager.isTaskOverdue(task);
+                const overdueClass = isOverdue ? 'overdue' : '';
+                
+                html += `
+                    <div class="task-item ${overdueClass}" data-task-id="${task.id}">
+                        <input type="checkbox" class="task-checkbox" ${task.completed ? 'checked' : ''}>
+                        <div class="task-content">
+                            <div class="task-title">${task.name}</div>
+                            <div class="task-description">${task.description}</div>
+                            <div class="task-meta">
+                                <div class="task-deadline">Due: ${DateUtils.formatDeadlineRelative(task.deadline)}, ${DateUtils.formatTime(task.deadlineTime)}</div>
+                                <div class="task-priority priority-${task.priority}">${task.priority === 'high' ? 'High' : 'Low'} Priority</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += `</div>`;
+        } else {
+            html += `
+                <div class="no-upcoming-tasks">
+                    <p>No upcoming tasks scheduled. Enjoy your free time!</p>
+                </div>
+            `;
+        }
     } else {
-        sortedTasks.forEach(task => {
+        // Display today's tasks
+        sortedTodayTasks.forEach(task => {
             const isOverdue = TaskManager.isTaskOverdue(task);
             const overdueClass = isOverdue ? 'overdue' : '';
             
@@ -424,6 +476,34 @@ function renderHomePage() {
     
     // Add event listeners to task checkboxes
     addTaskCheckboxListeners();
+    
+    // Add custom styles for upcoming tasks section
+    addUpcomingTasksStyles();
+}
+
+// Add custom styles for upcoming tasks
+function addUpcomingTasksStyles() {
+    const styleEl = document.createElement('style');
+    styleEl.innerHTML = `
+        .upcoming-title {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-size: 1.5rem;
+        }
+        
+        .upcoming-tasks {
+            margin-top: 15px;
+        }
+        
+        .no-upcoming-tasks {
+            text-align: center;
+            padding: 20px 0;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+    `;
+    document.head.appendChild(styleEl);
 }
 
 // Render the tasks page with all tasks
@@ -692,6 +772,12 @@ function renderHistoryPage() {
             </div>
         `;
     } else {
+        html += `
+            <div class="history-actions">
+                <button id="clear-history-btn" class="clear-history-btn">Clear History</button>
+            </div>
+        `;
+        
         sortedTasks.forEach(task => {
             const completedDate = DateUtils.formatDate(task.completedAt);
             
@@ -712,6 +798,9 @@ function renderHistoryPage() {
     }
     
     historyContainer.innerHTML = html;
+    
+    // Initialize the clear history button
+    initClearHistoryButton();
 }
 
 // Add event listeners to task checkboxes
@@ -778,58 +867,6 @@ function initClearHistoryButton() {
     if (clearHistoryBtn) {
         clearHistoryBtn.addEventListener('click', clearTaskHistory);
     }
-}
-
-// Update the renderHistoryPage function to initialize the clear button
-function renderHistoryPage() {
-    const historyContainer = document.querySelector('.history-container');
-    if (!historyContainer) return;
-    
-    const completedTasks = TaskManager.getCompletedTasks();
-    
-    // Sort by completion date (most recent first)
-    const sortedTasks = completedTasks.sort((a, b) => 
-        new Date(b.completedAt) - new Date(a.completedAt)
-    );
-    
-    let html = '<h2>Completed Tasks</h2>';
-    
-    if (sortedTasks.length === 0) {
-        html += `
-            <div class="no-tasks-message">
-                <p>No completed tasks yet.</p>
-            </div>
-        `;
-    } else {
-        html += `
-            <div class="history-actions">
-                <button id="clear-history-btn" class="clear-history-btn">Clear History</button>
-            </div>
-        `;
-        
-        sortedTasks.forEach(task => {
-            const completedDate = DateUtils.formatDate(task.completedAt);
-            
-            html += `
-                <div class="task-item">
-                    <input type="checkbox" class="task-checkbox" checked disabled>
-                    <div class="task-content completed-task">
-                        <div class="task-title">${task.name}</div>
-                        <div class="task-description">${task.description}</div>
-                        <div class="task-meta">
-                            <div class="task-deadline">Completed: ${completedDate}</div>
-                            <div class="task-priority">${task.priority === 'high' ? 'High' : 'Low'} Priority</div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        });
-    }
-    
-    historyContainer.innerHTML = html;
-    
-    // Initialize the clear history button
-    initClearHistoryButton();
 }
 
 // Add custom styles when page loads
